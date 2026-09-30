@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import DashboardPage from "@/pages/dashboard/Index";
+import { DashboardPage } from "@/pages/DashboardPage";
+// import DashboardPage from "@/pages/dashboard/Index";
 import HouseKeepingTasks from "@/pages/housekeeping-task/Index";
 import IndexPage from "@/pages/public/Index";
 import RoomsPage from "@/pages/room/Index";

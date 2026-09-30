@@ -7,5 +7,5 @@ export const dummyUserProfile: User = {
   phone: "+91 98765 43210",
   role: "ADMIN",
   isActive: true,
-  createdAt: "",
+  createdAt: "2023-03-01T00:00:00.000Z",
 };
