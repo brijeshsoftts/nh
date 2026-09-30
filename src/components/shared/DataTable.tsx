@@ -61,7 +61,7 @@ export function DataTable<T extends Record<string, any>>({
   );
 
   return (
-    <div className="w-full overflow-hidden rounded-md border border-border bg-card text-card-foreground shadow-sm">
+    <div className="grid w-full overflow-hidden rounded-md border border-border bg-card text-card-foreground shadow-sm">
       {/* Header Controls */}
       <div className="flex flex-col justify-between gap-4 border-b border-border p-4 sm:px-6 sm:py-4 lg:flex-row lg:items-center">
         <div>

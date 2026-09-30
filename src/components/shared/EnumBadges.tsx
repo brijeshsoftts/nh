@@ -100,6 +100,15 @@ export const EnumBadge = ({ value, className, ...props }: EnumBadgeProps) => {
 // 4. Type-Safe Specific Components
 // Use these in your tables/cards to ensure you only pass valid db enum values.
 
+export const StatusBadge = ({ value }: { value: boolean }) => (
+  <Badge
+    variant="outline"
+    className={cn("font-medium", value ? "bg-success" : "text-destructive")}
+  >
+    {value ? "Active" : "Inactive"}
+  </Badge>
+);
+
 export const OccupancyBadge = ({
   value,
 }: {

@@ -1,9 +1,12 @@
 import type { StaffCategory } from "@/types/enum.types";
-import type { User } from "@/types/user.types";
 
 export interface StaffItem {
   id: string;
-  user: User;
+  staff: string;
+  email: string;
+  phone: string;
   category: StaffCategory;
+  isActive: boolean;
   createdAt: string;
+  lastLogin: string;
 }

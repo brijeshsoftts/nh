@@ -14,7 +14,8 @@ import NewBookingPage from "@/pages/shared/NewBookingPage";
 import NotificationsPage from "@/pages/shared/NotificationsPage";
 import PaymentsPage from "@/pages/shared/PaymentsPage";
 import ProfilePage from "@/pages/shared/ProfilePage";
-import StaffPage from "@/pages/shared/StaffPage";
+import StaffPage from "@/pages/StaffPage";
+// import StaffPage from "@/pages/shared/StaffPage";
 
 export function Router() {
   return (
