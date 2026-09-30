@@ -1,5 +1,7 @@
 import type { StatCard } from "@/types/shared.types";
 
+import type { CustomerItem } from "./customers.types";
+
 export const dummyCustomerKpis: StatCard[] = [
   {
     id: "total-customers",
@@ -28,5 +30,98 @@ export const dummyCustomerKpis: StatCard[] = [
     value: "74",
     description: "Customers currently checked in",
     icon: "Hotel",
+  },
+];
+
+export const dummyCustomerItems: CustomerItem[] = [
+  {
+    id: "customer-001",
+    fullName: "Arjun Mehta",
+    email: "arjun.mehta@example.com",
+    phone: "+91 98765 10001",
+    totalBookings: 12,
+    totalSpend: 184500,
+    isActive: true,
+  },
+  {
+    id: "customer-002",
+    fullName: "Sarah Johnson",
+    email: "sarah.johnson@example.com",
+    phone: "+1 415 555 1002",
+    totalBookings: 8,
+    totalSpend: 126800,
+    isActive: true,
+  },
+  {
+    id: "customer-003",
+    fullName: "Rahul Sharma",
+    email: "rahul.sharma@example.com",
+    phone: "+91 98765 10003",
+    totalBookings: 5,
+    totalSpend: 78400,
+    isActive: true,
+  },
+  {
+    id: "customer-004",
+    fullName: "Emily Williams",
+    email: "emily.williams@example.com",
+    phone: "+44 7700 900004",
+    totalBookings: 15,
+    totalSpend: 245600,
+    isActive: true,
+  },
+  {
+    id: "customer-005",
+    fullName: "Vivek Kapoor",
+    email: "vivek.kapoor@example.com",
+    phone: "+91 98765 10005",
+    totalBookings: 3,
+    totalSpend: 45200,
+    isActive: false,
+  },
+  {
+    id: "customer-006",
+    fullName: "Olivia Brown",
+    email: "olivia.brown@example.com",
+    phone: "+1 415 555 1006",
+    totalBookings: 10,
+    totalSpend: 158900,
+    isActive: true,
+  },
+  {
+    id: "customer-007",
+    fullName: "Neha Verma",
+    email: "neha.verma@example.com",
+    phone: "+91 98765 10007",
+    totalBookings: 7,
+    totalSpend: 96300,
+    isActive: true,
+  },
+  {
+    id: "customer-008",
+    fullName: "Daniel Miller",
+    email: "daniel.miller@example.com",
+    phone: "+1 415 555 1008",
+    totalBookings: 2,
+    totalSpend: 29800,
+    isActive: false,
+  },
+  {
+    id: "customer-009",
+    fullName: "Priya Singh",
+    email: "priya.singh@example.com",
+    phone: "+91 98765 10009",
+    totalBookings: 9,
+    totalSpend: 137500,
+    isActive: true,
+  },
+  {
+    id: "customer-010",
+    fullName: "James Anderson",
+    email: "james.anderson@example.com",
+    phone: "+1 415 555 1010",
+    totalBookings: 6,
+    totalSpend: 89500,
+    isActive: true,
   },
 ];

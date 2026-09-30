@@ -245,7 +245,7 @@ function DetailRow({
         <span className="text-muted-foreground/80">{icon}</span>
         <span className="text-xs font-medium">{label}</span>
       </div>
-      <span className="max-w-[180px] truncate text-right text-xs font-medium text-foreground">
+      <span className="max-w-45 truncate text-right text-xs font-medium text-foreground">
         {value || "N/A"}
       </span>
     </div>

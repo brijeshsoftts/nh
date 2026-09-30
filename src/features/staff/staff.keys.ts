@@ -6,6 +6,7 @@ export const staffKeys = {
   lists: () => ["staff", "list"] as const,
   list: (params?: ListParams) => ["staff", "list", params] as const,
   detail: (id: string) => ["staff", "detail", id] as const,
+  search: (search?: string) => ["customers", "search", search] as const,
 } as const;
 
 export const staffMutationKeys = {
