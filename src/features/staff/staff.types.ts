@@ -2,7 +2,7 @@ import type { StaffCategory } from "@/types/enum.types";
 
 export interface StaffItem {
   id: string;
-  staff: string;
+  fullName: string;
   email: string;
   phone: string;
   category: StaffCategory;

@@ -14,9 +14,13 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { formatDate } from "@/lib/formatDate";
 import type { ColumnDef } from "@/types/shared.types";
 
+import { useDeleteStaff } from "../hooks/useDeleteStaff";
 import { useStaffList } from "../hooks/useStaffList";
 import { dummyStaffItems } from "../staff.mock";
 import type { StaffItem } from "../staff.types";
+
+import { UpdateStaffModal } from "./UpdateStaffModal";
+import { ViewStaffSheet } from "./ViewStaffSheet";
 
 const columns: ColumnDef<StaffItem>[] = [
   {
@@ -24,7 +28,7 @@ const columns: ColumnDef<StaffItem>[] = [
     header: "Staff",
     cell: (row) => (
       <div>
-        <p>{row.staff}</p>
+        <p>{row.fullName}</p>
         <p className="text-xs text-muted-foreground">{row.email}</p>
       </div>
     ),
@@ -54,7 +58,7 @@ const columns: ColumnDef<StaffItem>[] = [
     key: "action",
     header: "Action",
     align: "center",
-    cell: () => <ActionDropdownMenu />,
+    cell: (row) => <ActionDropdownMenu id={row.id} />,
   },
 ];
 
@@ -121,7 +125,11 @@ export function StaffTable() {
   );
 }
 
-function ActionDropdownMenu() {
+function ActionDropdownMenu({ id }: { id: string }) {
+  const [isViewModal, setIsViewModal] = useState(false);
+  const [isUpdateModal, setIsUpdateModal] = useState(false);
+  const { handleDelete, isDeleting } = useDeleteStaff();
+
   return (
     <>
       <DropdownMenu>
@@ -132,13 +140,43 @@ function ActionDropdownMenu() {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="end">
-          <DropdownMenuItem>View</DropdownMenuItem>
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem className={"text-destructive"}>
+          <DropdownMenuItem
+            onClick={() => setIsViewModal(true)}
+            disabled={isDeleting}
+          >
+            View
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => setIsUpdateModal(true)}
+            disabled={isDeleting}
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className={"text-destructive"}
+            onClick={() => handleDelete(id)}
+            disabled={isDeleting}
+          >
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      {isViewModal && (
+        <ViewStaffSheet
+          open={isViewModal}
+          onOpenChange={setIsViewModal}
+          id={id}
+        />
+      )}
+
+      {isUpdateModal && (
+        <UpdateStaffModal
+          open={isUpdateModal}
+          onOpenChange={setIsUpdateModal}
+          id={id}
+        />
+      )}
     </>
   );
 }

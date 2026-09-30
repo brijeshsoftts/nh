@@ -24,6 +24,7 @@ export const CreateStaffSchema = z
       .min(1, "Emergency contact is required")
       .regex(/^[0-9]{10}$/, "Emergency contact must be exactly 10 digits"),
     address: requiredString("Address"),
+    isActive: z.boolean().optional(),
   })
   .strict();
 

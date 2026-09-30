@@ -1,6 +1,6 @@
 import type { StatCard } from "@/types/shared.types";
 
-import type { StaffItem } from "./staff.types";
+import type { StaffDetail, StaffItem } from "./staff.types";
 
 export const dummyStaffKpis: StatCard[] = [
   {
@@ -40,7 +40,7 @@ export const dummyStaffKpis: StatCard[] = [
 export const dummyStaffItems: StaffItem[] = [
   {
     id: "staff-001",
-    staff: "Rajesh Kumar",
+    fullName: "Rajesh Kumar",
     email: "rajesh.kumar@example.com",
     phone: "+91 98765 43210",
     category: "HOUSEKEEPER",
@@ -50,7 +50,7 @@ export const dummyStaffItems: StaffItem[] = [
   },
   {
     id: "staff-002",
-    staff: "Priya Sharma",
+    fullName: "Priya Sharma",
     email: "priya.sharma@example.com",
     phone: "+91 98765 43211",
     category: "RECEPTIONIST",
@@ -60,7 +60,7 @@ export const dummyStaffItems: StaffItem[] = [
   },
   {
     id: "staff-003",
-    staff: "Amit Verma",
+    fullName: "Amit Verma",
     email: "amit.verma@example.com",
     phone: "+91 98765 43212",
     category: "HOUSEKEEPER",
@@ -70,7 +70,7 @@ export const dummyStaffItems: StaffItem[] = [
   },
   {
     id: "staff-004",
-    staff: "Neha Singh",
+    fullName: "Neha Singh",
     email: "neha.singh@example.com",
     phone: "+91 98765 43213",
     category: "HOUSEKEEPER",
@@ -80,7 +80,7 @@ export const dummyStaffItems: StaffItem[] = [
   },
   {
     id: "staff-005",
-    staff: "Vikram Patel",
+    fullName: "Vikram Patel",
     email: "vikram.patel@example.com",
     phone: "+91 98765 43214",
     category: "RECEPTIONIST",
@@ -90,7 +90,7 @@ export const dummyStaffItems: StaffItem[] = [
   },
   {
     id: "staff-006",
-    staff: "Anjali Gupta",
+    fullName: "Anjali Gupta",
     email: "anjali.gupta@example.com",
     phone: "+91 98765 43215",
     category: "HOUSEKEEPER",
@@ -100,7 +100,7 @@ export const dummyStaffItems: StaffItem[] = [
   },
   {
     id: "staff-007",
-    staff: "Suresh Yadav",
+    fullName: "Suresh Yadav",
     email: "suresh.yadav@example.com",
     phone: "+91 98765 43216",
     category: "RECEPTIONIST",
@@ -110,7 +110,7 @@ export const dummyStaffItems: StaffItem[] = [
   },
   {
     id: "staff-008",
-    staff: "Kavita Mishra",
+    fullName: "Kavita Mishra",
     email: "kavita.mishra@example.com",
     phone: "+91 98765 43217",
     category: "RECEPTIONIST",
@@ -120,7 +120,7 @@ export const dummyStaffItems: StaffItem[] = [
   },
   {
     id: "staff-009",
-    staff: "Rohit Agarwal",
+    fullName: "Rohit Agarwal",
     email: "rohit.agarwal@example.com",
     phone: "+91 98765 43218",
     category: "RECEPTIONIST",
@@ -130,7 +130,7 @@ export const dummyStaffItems: StaffItem[] = [
   },
   {
     id: "staff-010",
-    staff: "Pooja Tiwari",
+    fullName: "Pooja Tiwari",
     email: "pooja.tiwari@example.com",
     phone: "+91 98765 43219",
     category: "RECEPTIONIST",
@@ -139,3 +139,21 @@ export const dummyStaffItems: StaffItem[] = [
     lastLogin: "2026-09-30T09:10:00Z",
   },
 ];
+
+export const dummyStaffDetail: StaffDetail = {
+  id: "STF-105",
+  fullName: "Aaliyah Patel",
+  email: "aaliyah.patel@company.com",
+  phone: "+1 (555) 678-9012",
+  category: "HOUSEKEEPER",
+  isActive: true,
+  createdAt: "2024-02-12",
+  lastLogin: "2026-09-30 16:02",
+  address: "1001 Austin St, Houston, TX 77010",
+  fatherName: "Rajesh Patel",
+  motherName: "Priya Patel",
+  idProofNumber: "PASSPORT-77201948",
+  qualification: "B.A. in Communications",
+  experience: "2 Years",
+  emergencyContact: "+1 (555) 543-2109 (Father)",
+};
