@@ -1,4 +1,5 @@
 import { EllipsisVertical } from "lucide-react";
+import { useState } from "react";
 
 import { DataTable } from "@/components/shared/DataTable";
 import { StatusBadge } from "@/components/shared/EnumBadges";
@@ -9,9 +10,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useDebounce } from "@/hooks/useDebounce";
 import { formatDate } from "@/lib/formatDate";
 import type { ColumnDef } from "@/types/shared.types";
 
+import { useStaffList } from "../hooks/useStaffList";
 import { dummyStaffItems } from "../staff.mock";
 import type { StaffItem } from "../staff.types";
 
@@ -55,18 +58,65 @@ const columns: ColumnDef<StaffItem>[] = [
   },
 ];
 
+const filters = [
+  {
+    key: "status",
+    label: "Status",
+    options: [
+      {
+        label: "Active",
+        value: "Active",
+      },
+      {
+        label: "Inactive",
+        value: "Inactive",
+      },
+    ],
+  },
+  {
+    key: "category",
+    label: "Category",
+    options: [
+      {
+        label: "Receptionist",
+        value: "Receptionist",
+      },
+      {
+        label: "Housekeeper",
+        value: "Housekeeper",
+      },
+    ],
+  },
+];
+
 export function StaffTable() {
+  const [query, setQuery] = useState("");
+  const [filterValues, setFilterValues] = useState<Record<string, string>>({});
+  const [page, setPage] = useState(1);
+  const search = useDebounce(query, 500);
+  const { pagination, isLoading, refetch } = useStaffList({
+    page,
+    search,
+    ...filterValues,
+  });
+
   return (
     <DataTable
       title="Staff"
       description="Manage your team, roles, and staff activity."
       data={dummyStaffItems}
       columns={columns}
-      pagination={{
-        page: 20,
-        limit: 20,
-        total: 200,
+      filters={filters}
+      onFilterChange={(key, value) => {
+        setFilterValues((prev) => ({ ...prev, [key]: value }));
       }}
+      pagination={pagination}
+      onPageChange={setPage}
+      onSearchChange={setQuery}
+      isLoading={isLoading}
+      errorMessage="Something went wrong while loading staff."
+      emptyMessage="Please add staff to your hotel."
+      refetch={refetch}
     />
   );
 }

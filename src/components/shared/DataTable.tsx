@@ -4,7 +4,16 @@ import * as React from "react";
 
 import type { DataTable } from "@/types/shared.types";
 
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Spinner } from "../ui/spinner";
 import {
   Table,
   TableBody,
@@ -29,10 +38,16 @@ export function DataTable<T extends Record<string, any>>({
   onSearchChange,
   isError,
   isLoading,
-  errorMessage,
-  emptyMessage,
+  errorMessage = "Something went wrong",
+  emptyMessage = "No data found",
+  filters = [],
+  onFilterChange,
+  refetch,
 }: DataTable<T>) {
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [filterValues, setFilterValues] = React.useState<
+    Record<string, string>
+  >({});
   const [localPage, setLocalPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(defaultPageSize);
 
@@ -44,6 +59,22 @@ export function DataTable<T extends Record<string, any>>({
   const handlePage = (newPage: number) => {
     setLocalPage(newPage);
     if (onPageChange) onPageChange(newPage);
+  };
+
+  // filter
+  const handleFilterSelect = (key: string, value: string | null) => {
+    if (!value) return;
+    const updatedValue = value === "All" ? "" : value;
+    const updated = {
+      ...filterValues,
+      [key]: updatedValue,
+    };
+
+    setFilterValues(updated);
+    setLocalPage(1);
+
+    // Pass the specific key & value along with all filter values to parent
+    onFilterChange?.(key, updatedValue, updated);
   };
 
   // Pagination Math
@@ -87,6 +118,37 @@ export function DataTable<T extends Record<string, any>>({
               />
             </div>
           )}
+
+          {/* Filters */}
+          {filters.length > 0 && (
+            <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+              {filters.map((filter) => (
+                <Select
+                  key={filter.key}
+                  value={filterValues[filter.key] || "All"}
+                  onValueChange={(value) =>
+                    handleFilterSelect(filter.key, value)
+                  }
+                >
+                  <SelectTrigger className="h-10 min-w-35 border-border/70 bg-background shadow-none transition-colors hover:bg-muted/50">
+                    <SelectValue placeholder={filter.placeholder} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={"All"}>All {filter.label}</SelectItem>
+                    {filter.options.map((option) => (
+                      <SelectItem
+                        key={option.value.toString()}
+                        value={option.value.toString()}
+                      >
+                        {option.label.charAt(0).toUpperCase() +
+                          option.label.slice(1).toLowerCase()}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -118,11 +180,10 @@ export function DataTable<T extends Record<string, any>>({
             <TableBody className="divide-y">
               {isLoading ? (
                 <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center text-muted-foreground"
-                  >
-                    Loading data...
+                  <TableCell colSpan={columns.length}>
+                    <div className="mx-auto flex h-40 items-center justify-center">
+                      <Spinner className="size-8" />
+                    </div>
                   </TableCell>
                 </TableRow>
               ) : isError ? (
@@ -131,9 +192,16 @@ export function DataTable<T extends Record<string, any>>({
                     colSpan={columns.length}
                     className="h-32 text-center"
                   >
-                    <div className="flex flex-col items-center justify-center gap-2 text-destructive">
+                    <div className="flex h-40 flex-col items-center justify-center gap-2 text-destructive">
                       <AlertCircle className="h-6 w-6" />
-                      <p className="text-sm font-medium">{errorMessage}</p>
+                      <p className="mt-2 text-sm font-medium">{errorMessage}</p>
+                      <Button
+                        type="button"
+                        onClick={refetch}
+                        variant="destructive"
+                      >
+                        Try Again
+                      </Button>
                     </div>
                   </TableCell>
                 </TableRow>

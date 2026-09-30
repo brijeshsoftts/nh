@@ -10,3 +10,13 @@ export interface StaffItem {
   createdAt: string;
   lastLogin: string;
 }
+
+export interface StaffDetail extends StaffItem {
+  address: string;
+  fatherName: string;
+  motherName: string;
+  idProofNumber: string;
+  qualification: string;
+  experience: string;
+  emergencyContact: string;
+}

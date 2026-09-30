@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Spinner } from "@/components/ui/spinner";
 import { STAFF_CATEGORY_OPTIONS } from "@/constants/enum.constant";
 import { useScroll } from "@/hooks/useScroll";
 
@@ -146,11 +147,13 @@ export const NewStaffModal = ({ children }: { children: ReactNode }) => {
           <DialogFooter>
             <div className="flex justify-end gap-4">
               <DialogClose>
-                <Button type="button" variant="outline">
+                <Button type="button" variant="outline" disabled={isPending}>
                   Cancel
                 </Button>
               </DialogClose>
-              <Button type="submit">Save</Button>
+              <Button type="submit" disabled={isPending}>
+                {isPending ? <Spinner /> : "Save"}
+              </Button>
             </div>
           </DialogFooter>
         </form>

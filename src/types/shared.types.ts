@@ -33,13 +33,14 @@ export interface ColumnDef<T> {
 
 export interface FilterOption {
   label: string;
-  value: string;
+  value: string | boolean | number;
 }
 
-export interface DynamicFilter<T> {
-  key: keyof T | string;
+export interface DynamicFilter {
+  key: string;
   label: string;
   options: FilterOption[];
+  placeholder?: string;
 }
 
 export interface DataTable<T> {
@@ -48,7 +49,7 @@ export interface DataTable<T> {
   data: T[];
   pagination?: Pagination;
   columns: ColumnDef<T>[];
-  filters?: DynamicFilter<T>[];
+  filters?: DynamicFilter[];
   searchableKeys?: (keyof T | string)[];
   searchPlaceholder?: string;
   pageSizeOptions?: number[];
@@ -57,8 +58,14 @@ export interface DataTable<T> {
   onRowClick?: (item: T) => void;
   onActionClick?: (item: T) => void;
   renderActions?: (item: T) => React.ReactNode;
+  refetch?: () => void;
   showSearch?: boolean;
   showPagination?: boolean;
+  onFilterChange?: (
+    key: string,
+    value: string,
+    allFilters: Record<string, string>
+  ) => void;
   onSearchChange?: (query: string) => void;
   isLoading?: boolean;
   isError?: boolean;

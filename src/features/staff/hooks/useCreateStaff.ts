@@ -8,7 +8,7 @@ import { notifyError } from "@/lib/notification";
 import {
   type CreateStaff,
   CreateStaffSchema,
-} from "../schema/createSchema.schema";
+} from "../schema/createStaff.schema";
 import { staffKeys, staffMutationKeys } from "../staff.keys";
 import { staffService } from "../staff.service";
 
